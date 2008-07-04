@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+
+            <fo:region-before display-align="before" extent="0.5cm" />
+
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Paddings
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block padding="10pt" padding-left="50pt" padding-before="30pt" background-color="red" border="1px solid black">
+                padding="10pt" padding-left="50pt" padding-before="30pt"
+            </fo:block>
+            <fo:block font-style="italic">Note: In OO / ODF padding will be applied to an element only if some visible border is set on the corresponding side.</fo:block>
+            
+            <fo:block font-style="italic">End.</fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+</fo:root>

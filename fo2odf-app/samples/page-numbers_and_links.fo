@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+            <fo:region-before display-align="before" extent="0.5cm" />
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white"
+                background-color="#333333">
+                Test: Page numbers and links
+            </fo:block>
+        </fo:static-content>
+        <fo:static-content flow-name="xsl-region-after">
+            <fo:block text-align="center">
+                <fo:page-number />/<fo:page-number-citation ref-id="the-last" /> (1st page sequence)
+            </fo:block>
+        </fo:static-content>
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block>Page <fo:page-number /> from <fo:page-number-citation ref-id="the-last" /></fo:block>
+            <fo:block>Page of "Cited inline": <fo:page-number-citation ref-id="cited-inline" /></fo:block>
+            <fo:block>
+                <fo:basic-link internal-destination="third-block" color="blue" text-decoration="underline" font-style="italic">
+                    Link to Third block: internal-destination="third-block"
+                </fo:basic-link>
+            </fo:block>
+            <fo:block>
+                <fo:basic-link internal-destination="table1" color="blue" text-decoration="underline" font-style="italic">
+                    Link to table: internal-destination="table1"
+                </fo:basic-link>
+            </fo:block>
+            <fo:block>
+                <fo:basic-link external-destination="url(http://www.google.com)" color="blue" text-decoration="underline">
+                    external-destination="url(http://www.google.com)"
+                </fo:basic-link>
+            </fo:block>
+            <fo:block>
+                <fo:basic-link external-destination="url('http://www.google.com')" color="blue" text-decoration="underline">
+                    external-destination="url('http://www.google.com')" <fo:inline color="green">nested green fo:inline</fo:inline>
+                </fo:basic-link>
+            </fo:block>
+            <fo:block>
+                <fo:basic-link external-destination="http://www.google.com" color="blue" text-decoration="underline">
+                    external-destination="http://www.google.com" (should be url(...) but processors usually accept this too)
+                </fo:basic-link>
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+
+    <fo:page-sequence master-reference="all-pages" font-size="30pt">
+        <fo:static-content flow-name="xsl-region-after" font-size="12pt">
+            <fo:block text-align="center">
+                <fo:page-number />/<fo:page-number-citation ref-id="the-last" /> (2nd page sequence)
+            </fo:block>
+        </fo:static-content>
+        <fo:flow flow-name="xsl-region-body" font="72pt Times">
+            <fo:block space-before="600pt">Page <fo:page-number color="red" font-style="italic" /> from <fo:page-number-citation ref-id="the-last" /></fo:block>
+            <fo:block id="first-block" space-after="600pt">First block. <fo:inline id="cited-inline">Cited inline</fo:inline></fo:block>
+            <fo:block id="second-block">Second block</fo:block>
+            <fo:block id="third-block">
+                Third block Third block Third block Third block Third block Third block Third block Third
+                block Third block Third block Third block Third block Third block Third block
+            </fo:block>
+            
+            <fo:table id="table1" space-before="10pt" table-layout="fixed" width="10cm">
+                <fo:table-column column-width="5cm" />
+                <fo:table-column column-width="5cm" />
+                <fo:table-body>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1.5mm">
+                            <fo:block text-align="center">one</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1.5mm">
+                            <fo:block text-align="center">two</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+            
+            <fo:block id="the-last" />
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

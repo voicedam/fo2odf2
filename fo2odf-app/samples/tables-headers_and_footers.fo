@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+
+            <fo:region-before display-align="before" extent="0.5cm" />
+
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Tables - headers and footers
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block font-style="italic">Table with header, body and footer</fo:block>
+            <fo:table space-before="5pt" table-layout="fixed" width="12cm" font-size="20pt">
+                <fo:table-column column-width="6cm" />
+                <fo:table-column column-width="6cm" />
+
+                <fo:table-header>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 1.1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 1.2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 2.1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 2.2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-header>
+                <fo:table-footer>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Footer 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Footer 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-footer>
+                <fo:table-body>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+            
+            <fo:block font-style="italic">Table with header, body and footer. Here both 'table-omit-header-at-break'
+            and 'table-omit-footer-at-break' are set to true.</fo:block>
+            <fo:table space-before="5pt" table-layout="fixed" width="12cm" font-size="20pt"
+                    table-omit-header-at-break="true" table-omit-footer-at-break="true">
+                <fo:table-column column-width="6cm" />
+                <fo:table-column column-width="6cm" />
+
+                <fo:table-header>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 1.1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 1.2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 2.1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Header 2.2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-header>
+                <fo:table-footer>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Footer 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Footer 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-footer>
+                <fo:table-body>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                    <fo:table-row>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 1</fo:block>
+                        </fo:table-cell>
+                        <fo:table-cell border="solid 1pt" padding="1cm">
+                            <fo:block text-align="center">Body 2</fo:block>
+                        </fo:table-cell>
+                    </fo:table-row>
+                </fo:table-body>
+            </fo:table>
+
+            <fo:block font-style="italic">End.</fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+</fo:root>

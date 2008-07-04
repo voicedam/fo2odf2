@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xfc="http://www.xmlmind.com/foconverter/xsl/extensions">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+
+            <fo:region-before display-align="before" extent="0.5cm" />
+
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Floats
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body" font-size="15pt">
+            <fo:float float="left">
+                <fo:block border="1pt solid green" margin="5pt" padding="5pt">This block flows 'left'</fo:block>
+            </fo:float>
+            <fo:block>
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.                  
+            </fo:block>
+            
+            <fo:float float="start">
+                <fo:block border="1pt solid green" margin="5pt" padding="5pt">This block flows 'start'</fo:block>
+            </fo:float>
+            <fo:block>
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.                  
+            </fo:block>
+            
+            <fo:float float="right">
+                <fo:block border="1pt solid green" margin="5pt" padding="5pt">This block flows 'right'</fo:block>
+            </fo:float>
+            <fo:block>
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.                  
+            </fo:block>
+            
+            <fo:float float="end">
+                <fo:block border="1pt solid green" margin="5pt" padding="5pt">This block flows 'end'</fo:block>
+            </fo:float>
+            <fo:block>
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.                  
+            </fo:block>
+            
+            <fo:float float="before">
+                <fo:block border="1pt solid green" margin="5pt" padding="5pt">This block flows 'before'</fo:block>
+            </fo:float>
+            <fo:block>
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.                  
+            </fo:block>
+            
+            <fo:float float="none">
+                <fo:block border="1pt solid green" margin="5pt" padding="5pt">This block flows 'none'</fo:block>
+            </fo:float>
+            <fo:block>
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.
+                Block directly after the floating block. Block directly after the floating block.                  
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+</fo:root>

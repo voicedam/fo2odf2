@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" font-family="monospace">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+            <fo:region-before display-align="before" extent="0.5cm" />
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: White space treatment
+            </fo:block>
+        </fo:static-content>
+
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block space-before="10pt" white-space="normal" border="1pt solid black">
+                white-space="normal"
+new line...
+            </fo:block>
+
+            <fo:block space-before="10pt" white-space="pre" border="1pt solid black">
+                white-space="pre"
+new line...
+		new line with 2 tabs at the beginning
+            </fo:block>
+            
+            <fo:block space-before="10pt" white-space="nowrap" border="1pt solid black">
+                white-space="nowrap" Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+new line...
+            </fo:block>
+            
+            <fo:block space-before="10pt" linefeed-treatment="treat-as-space" white-space-collapse="false" border="1pt solid black">
+                linefeed-treatment="treat-as-space" white-space-collapse="false"    4 spaces
+
+
+new line after 2 empty lines...
+            </fo:block>
+            
+            <fo:block space-before="10pt" linefeed-treatment="treat-as-space" white-space-collapse="false" white-space-treatment="preserve" border="1pt solid black">
+                linefeed-treatment="treat-as-space" white-space-collapse="false" white-space-treatment="preserve"    4 spaces
+
+
+
+
+new line after 4 empty lines...
+            </fo:block>
+            
+            <fo:block space-before="10pt" white-space-treatment="ignore" border="1pt solid black">
+                white-space-treatment="ignore": Any    Space  Between These Words Will Be Ignored
+            </fo:block>
+            
+            <fo:block space-before="10pt" white-space-treatment="ignore" white-space-collapse="false" border="1pt solid black">
+                white-space-treatment="ignore" white-space-collapse="false": Any    Space  Between These Words Will Be Ignored
+            </fo:block>
+            
+            <fo:block space-before="10pt" white-space-collapse="false" border="1pt solid black">
+                 white-space-treatment=default(i.e. "ignore-if-surrounding-linefeed") white-space-collapse="false": Word
+New line    4 spaces followed by 5 spaces before new line
+            </fo:block>
+            
+            <fo:block space-before="10pt" linefeed-treatment="treat-as-zero-width-space" border="1pt solid black">
+                 linefeed-treatment="treat-as-zero-width-space"
+New line
+
+Line after 1 empty line
+            </fo:block>
+            
+            <fo:block id="end">End.</fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>
