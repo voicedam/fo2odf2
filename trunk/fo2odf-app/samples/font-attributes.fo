@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+            <fo:region-before display-align="before" extent="0.5cm" />
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Font attributes
+            </fo:block>
+        </fo:static-content>
+
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block space-before="10pt">
+                Font family:
+                <fo:inline font-family="Palatino">Palatino</fo:inline>,
+                <fo:inline font-family="Arial">Arial</fo:inline>,
+                <fo:inline font-family="Courier New">Courier New</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Font family (generic):
+                <fo:inline font-family="serif">serif</fo:inline>
+                <fo:inline font-family="sans-serif">sans-serif</fo:inline>
+                <fo:inline font-family="monospace">monospace</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Font family (multiple fonts for fallback):
+                <fo:inline font-family="Arial, Courier New">"Arial, Courier New"</fo:inline>,
+                <fo:inline font-family="WrongName, Courier New">"WrongName, Courier New"</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Font size:
+                <fo:inline font-size="8pt">8 pts</fo:inline>,
+                <fo:inline font-size="12pt">12 pts</fo:inline>,
+                <fo:inline font-size="16pt">16 pts</fo:inline>,
+                <fo:inline font-size="2em">2 ems</fo:inline>,
+                <fo:inline font-size="200%">200%</fo:inline>,
+                <fo:inline font-size="2cm">2 cms</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Font weight:
+                <fo:inline font-weight="bold">bold</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Font style:
+                <fo:inline font-style="italic">italic</fo:inline>,
+                <fo:inline font-style="oblique">oblique</fo:inline>,
+                <fo:inline font-style="backslant">backslant (not in ODF)</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Font variant:
+                <fo:inline font-variant="small-caps">small caps</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Text transform:
+                <fo:inline text-transform="capitalize">capitalize</fo:inline>,
+                <fo:inline text-transform="uppercase">Uppercase</fo:inline>,
+                <fo:inline text-transform="lowercase">Lowercase</fo:inline>,
+                <fo:inline text-transform="none">None</fo:inline>.                
+            </fo:block>
+            
+            <fo:block space-before="10pt">
+                Text decoration:
+                <fo:inline text-decoration="underline">underline</fo:inline>,
+                <fo:inline text-decoration="line-through">strike through</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Text decoration2:
+                <fo:inline text-decoration="underline">parent underlined,
+                    <fo:inline text-decoration="none">child not decorated</fo:inline>
+                    and
+                    <fo:inline color="red">this red child underlined too</fo:inline>
+                </fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Text decoration3:
+                <fo:inline text-decoration="blink">
+                    blinking
+                    <fo:inline text-decoration="no-blink">(no-blink)</fo:inline>
+                </fo:inline>
+                ,
+                <fo:inline text-decoration="line-through">
+                    line through
+                    <fo:inline text-decoration="underline">
+                        plus underline [
+                        <fo:inline text-decoration="no-line-through">without line through</fo:inline>
+                        ]
+                        <fo:inline text-decoration="none">(none)</fo:inline>
+                        <fo:inline text-decoration="overline">(overline fallback)</fo:inline>
+                    </fo:inline>
+                </fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Baseline shift:
+                <fo:inline baseline-shift="-1pt">-1 pt</fo:inline>,
+                <fo:inline baseline-shift="2pt">+2 pts</fo:inline>,
+                <fo:inline baseline-shift="sub">subscript</fo:inline>,
+                <fo:inline baseline-shift="super">superscript</fo:inline>,
+                <fo:inline baseline-shift="-20%">20% subscript</fo:inline>,
+                <fo:inline baseline-shift="20%">20% superscript</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Foreground color:
+                <fo:inline color="red">red</fo:inline>,
+                <fo:inline color="#808080">#808080</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Fallbacks:
+                <fo:inline color="rgb-icc(0, 255, 0, 'name', 1, 2)">green from rgb-icc(0, 255, 0, 'name', 1, 2)</fo:inline>,
+                <fo:inline color="system-color('name')">system-color('name')</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                Background color:
+                <fo:inline background-color="#F0F0F0">background-color="#F0F0F0"</fo:inline>,
+                <fo:inline background="repeat-x red">background="repeat-x red"</fo:inline>
+            </fo:block>
+            
+            <fo:block space-before="10pt">
+                Letter-spacing:
+                <fo:inline letter-spacing="normal">normal</fo:inline>,
+                <fo:inline letter-spacing="10pt">10pt</fo:inline>,
+                <fo:inline letter-spacing="0.5em">0.5em</fo:inline>,
+                <fo:inline letter-spacing="-2pt">-2pt</fo:inline>
+            </fo:block>
+            
+            <fo:block space-before="10pt">
+                Font shorthands:
+                <!-- font-size and font-family must be the last and in this order -->
+                <fo:inline font="900 italic small-caps 15pt Times">font="900 italic small-caps 15pt Times"</fo:inline>,
+                <fo:inline font="status-bar">font="status-bar"</fo:inline>, <fo:inline font="caption">font="caption"</fo:inline>.
+            </fo:block>
+
+            <fo:block space-before="10pt">
+                system-font() function:
+                <fo:inline font-size="system-font(small-caption)">font-size="system-font(small-caption)"</fo:inline>,
+                <fo:block margin-top="system-font(caption,font-size)">margin-top="system-font(caption,font-size)"</fo:block>
+            </fo:block>
+            
+            <fo:block color="abcdef">Unknown color code: color="abcdef".</fo:block>
+
+            <fo:block id="end"></fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

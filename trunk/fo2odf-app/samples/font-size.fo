@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+            <fo:region-before display-align="before" extent="0.5cm" />
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Font size attribute
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block font-size="12pt">
+                Absolute sizes:
+                <fo:inline font-size="1cm">1cm</fo:inline>,
+                <fo:inline font-size="10mm">10mm</fo:inline>,
+                <fo:inline font-size="0.5in">0.5in</fo:inline>,
+                <fo:inline font-size="1.5pc">1.5pc</fo:inline>,
+                <fo:inline font-size="10.345pt">10.345pt</fo:inline>.
+            </fo:block>
+            <fo:block font-size="12pt">
+                Relative sizes:
+                <fo:inline font-size="20px">20px</fo:inline>,
+                <fo:inline font-size="200%">200%</fo:inline>,
+                <fo:inline font-size="1.5em">1.5em</fo:inline>,
+                <fo:inline font-size="1.5ex">1.5ex</fo:inline>,<!-- not a valid unit for XSL FO -->
+                <fo:inline font-size="smaller">smaller</fo:inline>,
+                <fo:inline font-size="larger">larger</fo:inline>.
+            </fo:block>
+            <fo:block font-size="12pt"><!-- xslspec: On a computer screen a scaling factor of 1.2 is suggested between adjacent indexes -->
+                Named absolute sizes:
+                <fo:inline font-size="xx-small">xx-small</fo:inline>,
+                <fo:inline font-size="x-small">x-small</fo:inline>,
+                <fo:inline font-size="small">small</fo:inline>,
+                <fo:inline font-size="medium">medium</fo:inline>,
+                <fo:inline font-size="large">large</fo:inline>,
+                <fo:inline font-size="x-large">x-large</fo:inline>,
+                <fo:inline font-size="xx-large">xx-large</fo:inline>.
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

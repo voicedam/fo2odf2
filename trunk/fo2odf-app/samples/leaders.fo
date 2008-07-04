@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xfc="http://www.xmlmind.com/foconverter/xsl/extensions">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+
+            <fo:region-before display-align="before" extent="0.5cm" />
+
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Leaders
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block font-style="italic">Simple leaders</fo:block>
+            
+            <fo:block text-align-last="justify">
+                text-align-last="justify", no leader-pattern - space is default
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="300pt"
+                    leader-length.maximum="100%" />
+                4
+            </fo:block>
+            <fo:block text-align-last="justify">
+                text-align-last="justify", leader-pattern="dots"
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="100pt"
+                    leader-length.maximum="100%" leader-pattern="dots"  />
+                20
+            </fo:block>
+            <fo:block text-align-last="start">
+                text-align-last="start", no leader-pattern - space is default
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="300pt"
+                    leader-length.maximum="100%" />
+                4
+            </fo:block>
+            <fo:block text-align-last="start">
+                text-align-last="start", leader-pattern="dots"
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="100pt"
+                    leader-length.maximum="100%" leader-pattern="dots"  />
+                20
+            </fo:block>
+            <fo:block text-align-last="justify">
+                 leader-pattern="rule" color="red"
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="100pt" color="red"
+                    leader-length.maximum="100%" leader-pattern="rule" rule-style="solid" rule-thickness="5pt" />
+                3
+            </fo:block>
+            <fo:block text-align-last="justify">
+                 leader-pattern="use-content"
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="100pt"
+                    leader-length.maximum="100%" leader-pattern="use-content">LEADER</fo:leader>
+                3
+            </fo:block>
+            
+            <fo:block font-style="italic">Leaders using 'xfc:tab-position' extension attribute (defined by XMLMind's XFC)</fo:block>
+            
+            <fo:block text-align-last="justify">
+                 xfc:tab-position="-1cm"
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="100pt"
+                    leader-length.maximum="100%" leader-pattern="dots" xfc:tab-position="-1cm" />
+                4
+            </fo:block>
+            
+            <fo:block text-align-last="justify">
+                 xfc:tab-position="-1cm"
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="100pt"
+                    leader-length.maximum="100%" leader-pattern="dots" xfc:tab-position="-1cm" />
+                20
+            </fo:block>
+            
+            <fo:block text-align-last="justify">
+                 xfc:tab-position="15cm"
+                <fo:leader leader-length.minimum="12pt" leader-length.optimum="100pt"
+                    leader-length.maximum="100%" leader-pattern="dots" xfc:tab-position="15cm" />
+                3
+            </fo:block>
+            
+            <fo:block font-style="italic">End.</fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+</fo:root>

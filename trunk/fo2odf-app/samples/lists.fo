@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+            <fo:region-before display-align="before" extent="0.5cm" />
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Lists
+            </fo:block>
+        </fo:static-content>
+
+        <fo:flow flow-name="xsl-region-body">
+            <fo:list-block provisional-distance-between-starts="24pt" provisional-label-separation="8pt">
+
+                <fo:list-item>
+                    <fo:list-item-label start-indent="7pt" end-indent="label-end()">
+                        <fo:block>a.</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>List item 1.</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+
+                <fo:list-item>
+                    <fo:list-item-label start-indent="7pt" end-indent="label-end()">
+                        <fo:block>b.</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>List item 2.</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+
+                <fo:list-item>
+                    <fo:list-item-label start-indent="7pt" end-indent="label-end()">
+                        <fo:block>c.</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>List item 3.</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+
+            </fo:list-block>
+            
+            <fo:list-block provisional-distance-between-starts="100pt" provisional-label-separation="8pt">
+
+                <fo:list-item>
+                    <fo:list-item-label start-indent="7pt" end-indent="label-end()">
+                        <fo:block>LABEL</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>List item 1. provisional-distance-between-starts="100pt"</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+
+                <fo:list-item>
+                    <fo:list-item-label start-indent="7pt" end-indent="label-end()">
+                        <fo:block>LABEL2</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>List item 2.</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+
+            </fo:list-block>
+            
+            <fo:list-block provisional-distance-between-starts="200pt" provisional-label-separation="8pt">
+
+                <fo:list-item>
+                    <fo:list-item-label start-indent="7pt" end-indent="label-end()">
+                        <fo:block>LABEL</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>List item 1. provisional-distance-between-starts="200pt"</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+
+                <fo:list-item>
+                    <fo:list-item-label start-indent="7pt" end-indent="400pt">
+                        <fo:block>LABEL2</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="150pt">
+                        <fo:block>List item 2; label end-indent="400pt" (ignored); body start-indent="150pt"</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+
+            </fo:list-block>
+
+            <fo:list-block provisional-distance-between-starts="35mm" provisional-label-separation="5mm">
+                <fo:list-item border="1pt solid black" margin="20px">
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>term</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>definition. list-item has a border and margins (borders not possible for ODF as more paragraphs can appear in the item body)</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+                <fo:list-item>
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>term</fo:block>
+                        <fo:block>term</fo:block><!-- will be omitted when output to ODF - format limitation -->
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>definition</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+                <fo:list-item>
+                    <fo:list-item-label end-indent="label-end()">
+                        <fo:block>term</fo:block>
+                    </fo:list-item-label>
+                    <fo:list-item-body start-indent="body-start()">
+                        <fo:block>definition</fo:block>
+                        <fo:block>definition</fo:block>
+                    </fo:list-item-body>
+                </fo:list-item>
+            </fo:list-block>
+            
+            <fo:block font-style="italic">List embeded in a block with margin-top="20pt" margin-bottom="40pt":</fo:block>
+            
+            <fo:block margin-top="20pt" margin-bottom="40pt">
+                <fo:list-block provisional-distance-between-starts="24pt" provisional-label-separation="8pt">
+                    <fo:list-item>
+                        <fo:list-item-label start-indent="7pt" end-indent="label-end()">
+                            <fo:block>a.</fo:block>
+                        </fo:list-item-label>
+                        <fo:list-item-body start-indent="body-start()">
+                            <fo:block>List item 1.</fo:block>
+                        </fo:list-item-body>
+                    </fo:list-item>
+                </fo:list-block>
+                <fo:block>A block directly after the list (nested too)</fo:block>
+            </fo:block>
+            
+            <fo:block id="end" font-style="italic">End.</fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>
