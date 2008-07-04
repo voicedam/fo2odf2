@@ -1,0 +1,168 @@
+v1.2.1 (2008-06-28)
+-------------------
+- own "baseURI" attribute not used anymore, standard "xml:base" attribute used instead (for loading images with
+  relative source address).
+- treatment of @float='before' changed: it is processed as if 'none' was specified.
+- fixed: border specified on a <fo:table> element was not propagated to ODF table cells. This is still to be
+  done for further FO elements which can enclose table cells (f. e. <fo:table-row>).
+
+v1.2.0 (2008-06-20)
+-------------------
+- fixed: image's instrinsic height was used when these properties were specified: width="400px" height="auto"
+  content-width="scale-to-fit" content-height="scale-to-fit" (the same for width).
+- language ('language' and 'country') and hyphenation ('hyphenat*') properties implemented.
+- fixed: value 'hidden' of the 'border-style' property is treated as value 'none' now - i.e. it results in zero
+  border width.
+- "table-omit-header-at-break", "letter-spacing" and "line-height" properties implemented.
+- batch files changed to use the 7-zip program which is newly included in the library folder of the converter
+  for creating an ODF archive after XSLT conversion.
+- way of setting 'lib/fo2odf-javautils.jar' to OpenOffice's XSLT transformation process changed (and described).
+- fixed: @float="before" was not treated well - now a page break is put before the float's content and the float
+  envelope is omitted (as a fallback).
+- batch files fixed: 1) They couldn't be launched from any directory. 2) Spaces in the converter's installation
+  directory path couldn't be used.
+
+v1.1.1 (2008-04-13)
+-------------------
+- documentation updated (model, implementation notes). README file with installation and usage notes created.
+- smaller code cleanup (old files deleted).
+- directories structure changed (samples, batch files and libraries moved to separate directories).
+- batch files commented and refactored - they should be ready for "real" usage now.
+- "fo2odf.php": smaller improvements (<meta> tags added, version date displayed, heading is a link now).
+ 
+v1.1.0 (2008-04-11)
+-------------------
+- project build file for Ant prepared.
+- basic implementation of <fo:external-graphic>, i. e. images. Limitations of "fo2odf.php": Images cannot
+  be uploaded yet - support for uploading zip archives instead of simple FO files will be added in future.
+  Limitations with "Xalan-J/OO": relative file paths don't work well - at least a workaround parameter
+  {http//example.com/fo2odf}baseURI defined on the <fo:root> element is supported.
+- basic implementation of the <fo:float> element. "clear" attribute is yet to be implemented as in ODF
+  there is no direct equivalent attribute.
+- "fo:orphans" and "fo:widows" properties implemented.
+- "fo2odf.php": "all-in-one.fo" sample FO document which concatenates all sample FO documents created.
+- "fo2odf.php": sample FO documents can be downloaded now.
+- basic implementation of footnotes (<fo:footnote>). Footnote separator not implemented (in ODF only properties
+  of a separator line can be defined).
+- basic implementation of page layout and static content (headers and footers).
+
+v1.0.0 (2008-03-31)
+-------------------
+- implementation notes (in Czech) and model of the FO2ODF transformation (stylesheet structure, connection
+  with XSLT processors, ...) created.
+- fixed: use of EXSLT's str:tokenize() function caused OutOfMemory errors when Xalan's implementation was used...
+- implementation of column and row spans changed - rows are not processed recursively, each row computes its
+  row-covered cells. "column-number" property is not supported now. This all should consume less memory.
+- computing of properties simplified - it should be more clear now ('pt' suffix for length properties is added
+  only on the attributes templates level).
+- fixed: implementation of "white-space" was slow and caused problems with stack overflow.
+- fixed: The computation phase is cca 50 % faster now because: even when computing simple length properties values
+  (f.e. '10pt') the stylesheet tried to do all the replacements for preparing XPath for dynamic evaluation
+  (by "dyn:evaluate()") which was unnecesarily slow (the use of "dyn:evaluate()" itselft didn't cause the
+  slowness). In the same way computing of non-length properties was fixed (replacement of units to functions
+  was redundant).
+- code and comments cleanup.
+- generating right styles for nested block elements implemented - the core of the solution lies in the
+  'preprocess-fo-for-odf' phase. However the style attributes are only copied now. For some attributes
+  (like margins) a calculation should be done if they appear both on the embeded and on the embeding block.
+- page break is inserted before the first block element of every non-first page-sequence. I.e. simple initial
+  implementation of page sequences.
+- "fo2odf.php": "silent" parameter implemented - it enables to download the result of transformation directly
+  (to use the converter as a service).
+- fixed: <text:bookmark>-s are generated correctly for all blocks now (problem with nesting fixed).
+- "fo2odf.php": A lot of changes, the main ones:
+  - user interface improvements
+  - changes made to be able to run the converter on a webhosting
+  - the converter can run in PHP's 'safe_mode' now (among other things "php-safe_mode" implemented by the
+    'fo2odf-archive.xsl' stylesheet)
+  - server settings put to a separate file
+  - logic of the converter script fixed and clarified
+  - comments added
+
+v0.9.5 (2008-03-23)
+-------------------
+- "fo2odf.php": it is MUCH more friendly now. It enables to choose between converting a sample document on server
+  and converting an uploaded file. A lot of "web design rules" implemented.
+- "fo:basic-link" element implemented.
+- basic implementation of "fo:page-number-citation" element . It doesn't work for nested blocks (when "id" is
+  specified on the parent block but paragraphs are output only for nested blocks), tables and lists.
+- "fo:page-number" element implemented.  
+- "my:is-relative-prop-name()" fixed: using explicit list of relative properties names (more "secure" than before).
+- "trace" logging level implemented (for "really low level" logging).
+- "fo2odf.php": "loggingLevel" parameter implemented. Output is flushed so it appears in browser immediately.
+- "fo2odf.php": time of XSLT transformation and XSLT messages is output.
+- "fo2odf.php": "nice" messages from XSLT transformation shown.
+- basic implementation of leaders. XMLMind's XFC extension attribute 'xfc:tab-position' is supported.
+- basic implementation of lists (nested lists do not work well and not all FO properties are processed). Lists are
+  implemented by converting them to FO tables in a separate phase.
+- "proportional-column-width()" FO function implemented. In addition to this empty implementations of FO value
+  functions (which are not implemented yet or won't be implemented at all) added.
+- fixed: content was output to "table:table-column" if the column was generated from a table cell.
+- fixed: unknown elements (their text) from the source document were output.
+- fixed: inherited properties were not copied from elements "higher" than "fo:flow".
+- new FO properties implemented: "text-indent", "*.optimum" properties, "text-transform", "white-space" shorthand
+  with all expanded properties, "background" shorthand (only "background-color" is supported), "font" shorthand,
+  "keeps and breaks" properties. 
+- some code cleanup.
+- stylesheet parameter 'copy.unknown.fo.properties' removed. Instead a log warning is issued if an unknown
+  attribute appears (while processing in mode="styles").
+- "fo2odf.php": returns flat ODF document (1 XML file) if "flatODF" parameter is present.
+
+v0.9.0 (2008-03-13)
+-------------------
+- "compressing" of ODF automatic styles implemented. It enables to generate "nicer" identifiers (names) of styles
+  (not that obtained from generate-id(.) function) and to output only unique styles, i. e. styles with the same
+  "family" and the same properties are merged to just one unique style.
+- not needed namespace declarations removed from XSLT files (mainly "xsi" namespace).
+- inherited properties are copied to all elements in a separate phase. This simplifies further processing, mainly
+  computing ODF style properties for elements. 
+- "text-align" and "text-align-last" FO properties implemented.
+- basic implementation of tables. Implemented: column-number on table cells, number-columns-spanned on table cells,
+  number-rows-spanned on table cells. A "naive" generation of ODF's "table:table-column" if it is missing in the
+  source FO document. Table width is not computed if it is not explicitly specified in the source document (TODO).
+- stylesheet parameter 'copy.unknown.fo.properties' added. "foIn" namespace is not excluded from the result document
+  (not working well everywhere yet).
+
+v0.8.0 (2008-03-08)
+-------------------
+- basic implementation of paddings. Not considered when calculating margins.
+- simple XSLT logging via "xsl:message" implemented. It enables to output only messages with a given level
+  (i.e. 'debug', 'info', 'warn' or 'error').
+- implementation of borders. Not considered when calculating margins.
+- (re)implemented handling of "margin" properties. "Inheritance" of left and right margins partly implemented. Top
+  and bottom margins are yet to be solved as they are a little bit more complicated to compute.
+- implemented avoiding of generation of top or/and bottom properties of a paragraph (when a FO block generates more
+  ODF paragraphs).
+- generating ODF style element directly after a generated ODF element (like in the first implementation). The style
+  elements are omitted/extracted in the next phase. 
+
+v0.7.0 (2008-02-25)
+-------------------
+- FO shorthand properties are expanded ("expand_fo_shorthands.xsl" stylesheet).
+- expressions and FO "property values" functions are supported in values of FO properties ("compute_fo_properties.xsl"
+  stylesheet).
+- solved problem with slow and a lot of memory consuming processing when XSLT stylesheet run with Xalan.
+  Solution: "str:tokenize()" expressions for "my:is-...-property()" functions and similar put to global variables.
+- solved problem with "loosing" content of XSLT global variables obtained with the "exsl:node-set()" function
+  when XSLT stylesheet run with Xsltproc. Solution:
+  these global variables not accessed from definitons of other global variables - such variables made
+  local; f.e. the "nodes-with-expanded-shorthands" variable.
+
+v0.6.0 (2008-02-12)
+-------------------
+- paragraphs from "fo:block" are generated properly. Counting with embeded block elements as well.
+- "fo:wrapper" processed properly. In the 1st phase properties from wrappers are copied to child elements.
+  and the wrappers are omitted completely for simpler processing in the 2nd phase.
+- "inheritance" implemented for some properties ("font-size", "color", ...).
+- more paragraph and text properties are processed.
+- EXSLT employed more in stylesheets.
+- new FO documents for testing implementation of conversion of various parts of FO.
+- PHP script made more user friendly.
+- many minor improvements and fixes.
+
+v0.5.0 (2007-12-13)
+-------------------
+- first part of FO to ODF implementation completed (FO to ODF via PHP 5 script or BAT file; only some text and paragraph
+  are really processed, the rest of a FO document is ignored).
+- XSLT 1.0 with EXSLT extensions and "xsltproc" processor used for FO to ODF transformation.
+- "JUnit like" tests written for XSLT templates where meaningful.
