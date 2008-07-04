@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<tests>
+    <module name="attributes" />
+    <module name="compute_fo_properties" />
+    <module name="expand_fo_shorthands" />
+    <module name="preserve_white_space" />
+</tests>
