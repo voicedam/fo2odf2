@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     FO2ODF Converter build file.
+     
+     @created 2008-04-11
+     @author Petr Bodnar               
+     ====================================================================== -->
+<project name="FO2ODF Converter">
+	<property file="local.build.properties" /><!-- file not in CVS -->
+	<property file="build.properties" /><!-- file in CVS -->
+
+	<property name="version.version" value="${version.major}.${version.minor}.${version.maintenance}" />
+	
+	<property name="javautils.base.dir" value="java" />
+	<property name="javautils.jar.name" value="fo2odf-javautils.jar" />
+	<property name="javautils.src.dir" value="${javautils.base.dir}/src" />
+	<property name="javautils.build.dir" value="${javautils.base.dir}/bin" />
+	
+	<property name="javautils.deploy.dir" value="lib" />
+	
+	<property name="odf.stylesheets.dir" value="xsl/odf" />
+	<property name="samples.dir" value="samples" />
+
+	<!-- ================================= 
+	          target: deploy.javautils              
+	         ================================= -->
+	<target name="deploy.javautils" depends="jar.javautils" description="Deploys Java utility classes (copies them to the needed location).">
+		<copy file="${javautils.base.dir}/${javautils.jar.name}" todir="${javautils.deploy.dir}" />
+	</target>
+
+	<target name="jar.javautils" depends="compile.javautils" description="Jar-s Java utility classes">
+		<jar destfile="${javautils.base.dir}/${javautils.jar.name}" basedir="${javautils.build.dir}" />
+	</target>
+	
+	<target name="compile.javautils" description="Compiles Java utility classes">
+		<javac srcdir="${javautils.src.dir}" destdir="${javautils.build.dir}" classpath="." />
+	</target>
+	
+	<!-- ================================= 
+	          target: all.in.one.samples              
+	         ================================= -->
+	<target name="all.in.one.samples" depends="" description="(Re)generates the 'all-in-one.fo' sample document">
+		<!-- Note: the last argument for 'xsltproc' can be any XML file in this command: -->
+		<exec command="xsltproc -o all-in-one.fo all-in-one-samples.xsl all-in-one-samples.xsl" dir="${samples.dir}" />
+	</target>
+
+</project>

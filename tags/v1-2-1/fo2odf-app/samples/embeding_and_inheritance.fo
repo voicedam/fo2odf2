@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm"
+                           margin-right="1.5cm" margin-top="1.5cm"
+                           master-name="all-pages" page-height="29.7cm"
+                           page-width="21cm">
+      <fo:region-body border-style="solid" border-width="1pt"
+                      margin-bottom="0.5cm" margin-top="0.5cm" padding="7.5pt" />
+
+      <fo:region-before display-align="before" extent="0.5cm" />
+
+      <fo:region-after display-align="after" extent="0.5cm" />
+    </fo:simple-page-master>
+  </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="all-pages">
+    <fo:static-content flow-name="xsl-region-before">
+        <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+            Test: Embeding and inheritance
+        </fo:block>
+    </fo:static-content>
+    
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block background-color="blue" font-size="10pt" margin-left="20pt" color="white">
+        Parent Block white text with blue background...
+        <fo:block background-color="red" font-size="200%" margin-left="20pt">1st Embedded block</fo:block>
+        <fo:block background-color="red" font-size="200%" margin-left="20pt">2nd Embedded block</fo:block><fo:block>3rd Embedded block; with no space before opening tag and "inherited" background-color</fo:block>
+        ...continues
+      </fo:block>
+      <fo:block><!-- not style should be generated for this block as it generates no content. -->
+        <fo:block>Block directly in another block.</fo:block>
+      </fo:block>
+      <fo:block><fo:block>Block directly in another block (with no additional text nodes).</fo:block></fo:block>
+      
+      <fo:block>Block before empty block</fo:block>
+      <fo:block margin-top="50pt">  </fo:block>
+      <fo:block>Block after block with only spaces. The empty block has margin-top="50pt"</fo:block>
+      <fo:block>Block before empty block</fo:block>
+      <fo:block margin-top="50pt"></fo:block>
+      <fo:block>Block after completely empty block. The empty block has margin-top="50pt"</fo:block>
+      
+      <fo:wrapper margin-left="20px" color="blue" font-size="75%"><!-- declares properties inherited by child elements -->
+          <fo:block>First block properties inherited from wrapper ("margin-left" is not inherited but XFC applies this margin, XEP doesn't, what is right?).</fo:block>
+          <!-- XSL specif.: it [wrapper] does serve as a carrier to hold inheritable properties that are utilized by its children. -->
+          <fo:block color="green" font-size="100%" margin-left="10px">
+            Second block within wrapper but its "color" is "green", it has additional left margin and font-size is the same (set to "100%")
+          </fo:block>
+      </fo:wrapper>
+      
+      <fo:block-container margin-left="20px" color="blue" font-size="75%">
+          Invalid text in block-container
+          <fo:block>First block properties inherited from block-container</fo:block>
+          <fo:block color="green" font-size="100%" margin-left="10px">
+            Second block within block-container but its "color" is "green", it has additional left margin and font-size is the same (set to "100%")
+          </fo:block>
+      </fo:block-container>
+      
+      <fo:block>
+        Block with <fo:wrapper color="red">red text created [<fo:wrapper font-size="150%" color="blue">blue, [<fo:inline font-style="italic">italic</fo:inline>] 150%</fo:wrapper>] from a wrapper</fo:wrapper>.
+      </fo:block>
+      
+      <fo:block>
+        Another block with <fo:wrapper color="red">red text <!-- comment -->created from a wrapper <fo:block>EMBEDDED BLOCK IN THE WRAPPER</fo:block> text continues...</fo:wrapper>.
+      </fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+  
+  <fo:page-sequence master-reference="all-pages">
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block>Another page-sequence.</fo:block>
+      <fo:block break-before="page" break-after="auto" margin-top="10pt" margin-bottom="10pt">
+        <fo:block break-before="auto">break-before="auto", but parent has break-before="page"</fo:block>
+        <fo:block break-after="page">break-after="page", even though parent has break-after="auto"</fo:block>
+      </fo:block>
+      <fo:block>another flow block...</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+  
+  <fo:page-sequence master-reference="all-pages">
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block>Another page-sequence.</fo:block>
+      <fo:block break-before="auto" break-after="page" margin-top="10pt" margin-bottom="10pt">
+        <fo:block break-before="page">break-before="page", even though parent has break-before="auto"</fo:block>
+        <fo:block break-after="auto">break-after="auto", but parent has break-after="page"</fo:block>
+      </fo:block>
+      <fo:block>another flow block...</fo:block>
+      
+      <fo:block margin-top="40pt" margin-bottom="40pt">
+          <fo:block margin-top="20pt" margin-bottom="20pt">
+              <fo:block margin-top="5pt" margin-bottom="5pt" white-space="pre">
+                  &lt;fo:block margin-top="40pt" margin-bottom="40pt"&gt;
+                      &lt;fo:block margin-top="20pt" margin-bottom="20pt"&gt;
+                          &lt;fo:block margin-top="5pt" margin-bottom="5pt"&gt;&lt;/fo:block&gt;
+                      &lt;/fo:block&gt;
+                  &lt;/fo:block&gt;
+              </fo:block>
+          </fo:block>
+      </fo:block>
+      
+      <fo:block>another flow block...</fo:block>
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
