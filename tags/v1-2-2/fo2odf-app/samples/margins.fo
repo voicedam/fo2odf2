@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+
+            <fo:region-before display-align="before" extent="0.5cm" />
+
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Margins
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block font-style="italic">Absolute margins:</fo:block>
+            
+            <fo:block margin-left="10pt" margin-right="10px" color="" background-color="red" border="1px solid black" border-left="10px solid black" border-width="3px">
+                margin-left="10pt" margin-right="10px"
+            </fo:block>
+            <fo:block margin-top="10pt" margin-bottom="10pt" background-color="green" border="1px solid black">
+                margin-top="10pt" margin-bottom="10pt"
+            </fo:block>
+            
+            <fo:block font-style="italic">Relative margins:</fo:block>
+            
+            <fo:block start-indent="10pt" end-indent="10px" background-color="red" border="1px solid black">
+                start-indent="10pt" end-indent="10px"
+            </fo:block>
+            <fo:block space-before="10pt" space-after="10pt" space-after.optimum="30pt" background-color="green" border="1px solid black">
+                space-before="10pt" space-after="10pt" space-after.optimum="30pt"
+            </fo:block>
+            
+            <fo:block>inline's spaces not supported in ODF: 
+                <fo:inline space-start="20pt" space-end="20pt">space-start="20pt" space-end="20pt"</fo:inline>
+                ...after inline
+            </fo:block>
+            
+            <fo:block font-style="italic">"start-indent" attribute SHOULD NOT be additive for "fo:block" in another "fo:block"</fo:block>
+            
+            <fo:block space-before="10pt" start-indent="10pt" background-color="red" border="1px solid black">
+                Surrounding block...: space-before="10pt" start-indent="10pt"
+                <fo:block space-before="10pt" space-after="5pt" start-indent="10pt" end-indent="10pt" background-color="green" border="1px solid black">
+                    space-before="10pt" space-after="5pt" start-indent="10pt" end-indent="10pt"
+                    <fo:block start-indent="15pt" space-before="inherit" end-indent="5pt" background-color="blue" border="1px solid black">
+                        embedded block inside embedded block, with: start-indent="15pt" space-before="inherit" end-indent="5pt"
+                    </fo:block>
+                </fo:block>
+                ...surrounding block continues...
+                <fo:block background-color="white">
+                    embedded block with white background
+                </fo:block>
+                ...end of surrounding block
+            </fo:block>
+            
+            <fo:block font-style="italic">No text in the following surrounding block (space-before="3pt" - XFC collapses, XEP doesn't):</fo:block>
+            
+            <fo:block space-before="3pt" start-indent="10pt" background-color="red" border="1px solid black">
+                <fo:block space-before="10pt" space-after="10pt" start-indent="10pt" end-indent="10pt" background-color="green" border="1px solid black">
+                    space-before="10pt" space-after="10pt" start-indent="10pt" end-indent="10pt"
+                    <fo:block start-indent="15pt" space-before="10pt" end-indent="5pt" background-color="blue" border="1px solid black">
+                        embedded block inside embedded block, with: start-indent="15pt" space-before="10pt" end-indent="5pt"
+                    </fo:block>
+                </fo:block>
+            </fo:block>
+            
+            <fo:block font-style="italic">"start-indent" attribute SHOULD be additive for "fo:block" in a "fo:block-container" (space-before="15pt" - XFC collapses, XEP doesn't)</fo:block>
+            <fo:block-container space-before="15pt" start-indent="10pt" background-color="red" border="1px solid black"><!-- no text in this surrounding block -->
+                <fo:block space-before="10pt" space-after="10pt" start-indent="10pt" end-indent="10pt" background-color="green" border="1px solid black">
+                    space-before="10pt" space-after="10pt" start-indent="10pt" end-indent="10pt"
+                    <fo:block start-indent="15pt" space-before="10pt" end-indent="5pt" background-color="blue" border="1px solid black">
+                        embedded block inside embedded block, with: start-indent="15pt" space-before="10pt" end-indent="5pt"
+                    </fo:block>
+                </fo:block>
+            </fo:block-container>
+            
+            <fo:block font-style="italic">Spaces do not collapse when .precedence="force" at both blocks:</fo:block>
+            <fo:block space-after="10pt" border="1px solid black">space-after="10pt"</fo:block>
+            <fo:block space-before="8pt" border="1px solid black">space-before="8pt"</fo:block>
+            <fo:block space-after="10pt" space-after.precedence="force" border="1px solid black">space-after="10pt" space-after.precedence="force"</fo:block>
+            <fo:block space-before="8pt" space-before.precedence="force" space-after="4pt" space-after.precedence="force" border="1px solid black">space-before="8pt" space-before.precedence="force" space-after="4pt" space-after.precedence="force"</fo:block>
+            <fo:block space-before="20pt" space-before.precedence="0" border="1px solid black">space-before="20pt" space-before.precedence="0"</fo:block>
+            
+            <fo:block margin-left="20pt" text-indent="10pt" border="1px solid black">margin-left="20pt" text-indent="10pt". Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</fo:block>
+            
+            <fo:block font-style="italic">End.</fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+    <fo:page-sequence master-reference="all-pages">
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block>preceeding block...</fo:block>
+            <fo:block margin-bottom="10pt" margin="30pt">margin-bottom="10pt" margin="30pt"</fo:block>
+            <fo:block>succeeding block...</fo:block>
+            
+            <fo:block margin-bottom="10pt">margin-bottom="10pt"</fo:block>
+            <fo:block margin-top="10pt">margin-top="10pt"</fo:block>
+            
+            <fo:block border="1px solid black" margin-top="10pt">
+                <fo:block margin-top="5pt">Block with margin-top="5pt" inside block with border="1px solid black" margin-top="10pt"</fo:block>
+                <fo:block>Another embedded block</fo:block>
+            </fo:block>
+            
+            <fo:block font-style="italic" font-size="9pt">
+                XSL 1.0 specif.: If both an absolute and a corresponding relative property are explicitly
+                specified, then the above rule gives precedence to the absolute property, and the specified
+                value of the corresponding relative property is ignored in determining the computed value of
+                the corresponding properties:
+            </fo:block>
+            <fo:block margin-top="10pt" space-before="30pt">margin-top="10pt" space-before="30pt" (unlike XFC, XEP takes the "space-before" property!)</fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+    <!-- Test ".conditionality" -->
+    <fo:page-sequence master-reference="all-pages">
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block space-before.optimum="20pt" space-before.conditionality="discard" background-color="red" border="1px solid black">
+                space-before.optimum="20pt" space-before.conditionality="discard"
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+    <fo:page-sequence master-reference="all-pages">
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block space-before.optimum="20pt" space-before.conditionality="retain" background-color="red" border="1px solid black">
+                space-before.optimum="20pt" space-before.conditionality="retain"
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+</fo:root>

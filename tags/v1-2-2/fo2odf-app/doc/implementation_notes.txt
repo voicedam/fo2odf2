@@ -1,0 +1,45 @@
+These are implementation notes of the FO2ODF Converter project. Every developer should read this text to understand the basic concepts of the implementation before making changes to it. Reading the '/README.TXT' file is not a bad idea as well. 
+
+=== GENERAL ===
+
+* XSLT styles are written in the way so they can be launched with XSLT processors Xalan-J and libxslt. Xalan-J is used by OpenOffice as the processor for XML filters, so the styles can be installed as an XML filter for opening XSL FO documents. The libxslt library is then used by PHP 5 or later.
+
+* As "pure" XSLT 1 without any extensions offers only limited means of documents transformation, the styles use extension functions and elements defined in EXSLT, without which a successful transformation would be nearly unthinkable.
+
+* Transformation from FO to ODF is done in more phases. Because in XSLT it would be impossible to implement the relatively complex transformation just in one single phase. Moreover this separation of transformation into multiple phases has the advantage that we can focus only on some part of the transformation in each phase, so the created styles can be more readable and more easily manageable. 
+
+* For easier debugging of the styles and for giving information to users of these styles the styles log more or less important events with the <xsl:message> element. For easy setting of level of messages which should logged a simple framework code was created (see 'xslt_logging.xsl' for details) and used instead of just directly calling the <xsl:message> element.
+
+* All text files of the implementation are in the UTF-8 encoding if there no special reason for having a file in a different encoding.
+
+=== STRUCTURE OF THE XSLT FILES ====
+
+* In the '/xsl/common' directory library styles containing generally  usable templates and functions are located (e. g. 'strings.xsl' or 'xslt_logging.xsl') - without consideration of the conversion area.
+
+* In the '/xsl/odf' directory styles for implementing the FO to ODF conversion are located.
+
+* In the '/xsl/odf/test' directory styles for testing the created styles are located. They are similar to xUnit tests found in various programming languages. Tests do not cover the whole conversion but usually only smaller units for which a test can be written in some reasonable time. That's why there are also sample FO documents for manual (visual) validation of the styles functionality (in the '/samples' directory).
+
+* The file which is passed to an XSLT processor is either 'fo2odf-one_xml.xsl' or 'fo2odf-archive.xsl'.
+
+* The 'fo2odf.xsl' file imports all styles necessary for the transformation and defines some often used functions.
+
+* The 'content.xsl' can be considered as the main file that contains most of the process of the transformation.
+
+* See 'fo2odf_model.*' files for some more info.
+
+=== TROUBLESHOOTING ===
+
+* Repeated usage of the EXSLT function str:tokenize() causes an OutOfMemory error if the transformation is launched via Xalan-J (tested on 2.6.2 and 2.7.1 versions). That's why this function is used only for definition of global variables. If it is needed inside a template, then its implementation defined via the EXSLT <func:function> element is used - this doesn't cause the memory overflow.
+
+* It seems that Xalan-J won't let us define a new function in a namespace which is listed in the "extension-element-prefixes" stylesheet attribute. Although the function definition is possible, when such a function is called, it is searched (by Xalan-J) only in the class which implements a given extension and if it is not found, Xalan-J doesn't try to find the function in the stylesheet. That's why EXSLT functions which Xalan-J or libxslt doesn't implement and for which a func:function implementation exists, are defined in namespace whose name and URI is the same as the original with the change of adding a trailing "2". I. e. for example xmlns:str2="http://exslt.org/strings2" and function "str2:tokenize".
+
+* Functions defined for the needs of transformation are defined in namespace xmlns:my="http://example.com/muj". This will be probably soon changed to xmlns:fo2odf="http://fo2odf.sourceforge.net" or similar although it is probably not critical for successful functioning of the styles.
+
+* The libxslt library probably doesn't enable to access global variables when using xsl:key inside a <func:function> element. This hinders us from implementing functions like "my:is-inherited-property" with the help of xsl:key. Maybe in future we could workaround this by using the xsl:key conditionally according to the XSLT processor used.
+
+* The libxslt library cannot access global variables obtained via exsl:node-set() (or maybe in other ways too) if we try to access them from a func:function function which was called inside a definition of another global variable. The variable can be read successfully only once, on subsequent accesses it is already "empty". That's why the styles don't usually must use local variables inside templates.
+
+=== OPEN ISSUES ===
+
+There is still a lot of things to be solved and done. Some of them are listed in the '/doc/todo.txt' file. Others can be found directly in the source files - in "TODO" or "FIXME" comments.

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+            <fo:region-before display-align="before" extent="0.5cm" />
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Paragraph attributes
+            </fo:block>
+        </fo:static-content>
+
+        <fo:flow flow-name="xsl-region-body" font-size="20pt">
+            <fo:block line-height="normal">
+                line-height="normal" line-height="normal" line-height="normal" line-height="normal" line-height="normal"
+            </fo:block>
+
+            <fo:block space-before="10pt" line-height="30pt">
+                line-height="30pt" line-height="30pt" line-height="30pt" line-height="30pt" line-height="30pt" line-height="30pt" 
+            </fo:block>
+            
+            <fo:block space-before="10pt" line-height="150%">
+                line-height="150%" line-height="150%" line-height="150%" line-height="150%" line-height="150%" line-height="150%" 
+            </fo:block>
+            
+            <fo:block space-before="10pt" line-height="2">
+                line-height="2" line-height="2" line-height="2" line-height="2" line-height="2" line-height="2" 
+            </fo:block>
+            
+            <fo:block space-before="10pt">
+                Normal line height Normal line height Normal line height Normal line height <fo:inline line-height="200%">&lt;fo:inline line-height="200%"&gt;</fo:inline> (not supported in ODF)
+                Normal line height Normal line height Normal line height Normal line height
+            </fo:block>
+            
+            <fo:block space-before="10pt" margin-left="40pt" language="en" fo:country="GB" hyphenate="true" hyphenation-keep="page"
+                hyphenation-ladder-count="2" hyphenation-push-character-count="2" hyphenation-remain-character-count="2">
+                <fo:inline font-size="10pt">language="en" fo:country="GB" hyphenate="true" hyphenation-keep="page"
+                hyphenation-ladder-count="2" hyphenation-push-character-count="2" hyphenation-remain-character-count="2": </fo:inline>
+                Some really really text with long words: television computer organize refrigerator national specification representation
+                television computer organize refrigerator national specification representation
+                television computer organize championship refrigerator national specification representation
+                television computer organize championship refrigerator national specification representation evaluation
+            </fo:block>
+            
+            <fo:block space-before="10pt" margin-left="40pt" language="en" country="GB" hyphenate="true" hyphenation-keep="page"
+                hyphenation-ladder-count="1" hyphenation-push-character-count="2" hyphenation-remain-character-count="3">
+                <fo:inline font-size="10pt">language="en" country="GB" hyphenate="true" hyphenation-keep="page"
+                hyphenation-ladder-count="2" hyphenation-push-character-count="2" hyphenation-remain-character-count="3": </fo:inline>
+                Some really really text with long words: television computer organize refrigerator national specification representation
+                television computer organize refrigerator national specification representation
+                television computer organize championship refrigerator national specification representation
+                television computer organize championship refrigerator national specification representation evaluation 
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

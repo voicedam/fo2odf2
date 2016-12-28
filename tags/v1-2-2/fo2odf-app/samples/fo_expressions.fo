@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+            <fo:region-before display-align="before" extent="0.5cm" />
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Expressions in FO properties
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body" font-size="12pt">
+            <fo:block font-size="10pt + 5pt">10pt + 5pt = 15pt</fo:block>
+            <fo:block font-size="15pt - 5pt">15pt - 5pt = 10pt</fo:block>
+            <fo:block font-size="2 * 10pt">2 * 10pt = 20pt</fo:block>
+            <fo:block font-size="2 * 100%">2 * 100% = 24pt</fo:block>
+            <fo:block font-size="2 * 0.4em">2 * 0.4em = 9.6pt</fo:block>
+            <fo:block font-size="(1pt + 2pt) * 3">(1pt + 2pt) * 3 = 9pt</fo:block>
+            <fo:block font-size="3em div 4">3em div 4 = 9pt</fo:block>
+            <fo:block font-size="(109 mod 10) * 1pt">(109 mod 10) * 1pt = 9pt</fo:block>
+            
+            <!-- XSL specif.: "In addition, only the mod, addition, and subtraction operators require that the numerics on either
+            side of the operation be absolute numerics of the same unit power. For other operations, the unit powers may be different
+            and the result should be mathematically consistent as with the handling of powers in algebra."
+            - in my opinion this is too restrictive for "mod" operator as instead of "109pt mod 10" one must write "(109 mod 10) * 1pt" which is unnecessarily "too long"
+            - XFC behaviour: accepts the following expression
+            - XEP behaviour: shows error "Cannot calculate Length modulo Integer" -->
+            <fo:block font-size="(109pt mod 10) + 5pt + 50%">(109pt mod 10) + 5pt + 50% = 20pt (Illegal in XEP and according to XSL specif.)</fo:block>
+            
+            <fo:block font-size="109 mod 10">109 mod 10 = illegal power</fo:block>
+            <fo:block font-size="2pt * 2pt">2pt * 2pt = illegal power</fo:block>
+            
+            <fo:block font-size="   10pt + 5pt   ">"   10pt + 5pt   " = 15pt</fo:block>
+            <fo:block font-size="inherit">inherit = 12pt</fo:block>
+            <fo:block color="red" background-color="blue" margin-top="15pt">
+                &lt;block color="red" background-color="blue" margin-top="15pt"&gt;
+                <fo:block color="inherited-property-value()">color="inherited-property-value()"</fo:block>
+                <fo:block margin-top="inherited-property-value()">margin-top="inherited-property-value()" (illegal - property 'margin-top' not inherited)</fo:block>
+                
+                <fo:block margin-top="from-parent()" margin-bottom="from-parent()">margin-top="from-parent()" margin-bottom="from-parent()"</fo:block>
+                <fo:block background-color="from-parent(color)" color="white">background-color="from-parent(color)" color="white"</fo:block>
+                <fo:block margin-top="from-parent()" margin-bottom="from-parent(margin-top)">margin-top="from-parent()" margin-bottom="from-parent(margin-top)"</fo:block>
+                <fo:block>some block...</fo:block>
+                &lt;/block&gt;
+            </fo:block>
+            
+            <fo:block margin-top="15pt">
+                &lt;block margin-top="15pt"&gt;
+                <fo:block>
+                    &lt;block&gt;
+                    <fo:block>some block...</fo:block>
+                    <fo:block margin-top="from-parent() * 2">margin-top="from-parent() * 2" -- no effect</fo:block>
+                    <fo:block margin-top="from-nearest-specified-value() * 2" margin-bottom="from-nearest-specified-value(margin-top)">margin-top="from-nearest-specified-value() * 2"  margin-bottom="from-nearest-specified-value(margin-top)" -- effect (top margin = 2 * bottom margin)</fo:block>
+                    &lt;/block&gt;
+                </fo:block>
+                &lt;/block&gt;
+            </fo:block>
+
+            <fo:block font-size="10pt">
+                &lt;block font-size="10pt"&gt;
+                <fo:block font-size="200%" margin-left="1.2em">font-size="200%" margin-left="1.2em" -- margin-left = 24pt</fo:block>
+                &lt;/block&gt;
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

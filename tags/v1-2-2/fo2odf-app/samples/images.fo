@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xfc="http://www.xmlmind.com/foconverter/xsl/extensions">
+    <fo:layout-master-set>
+        <fo:simple-page-master margin-bottom="1.5cm" margin-left="1.5cm" margin-right="1.5cm"
+            margin-top="1.5cm" master-name="all-pages" page-height="29.7cm" page-width="21cm">
+            <fo:region-body border-style="solid" border-width="1pt" margin-bottom="0.5cm" margin-top="0.5cm"
+                padding="7.5pt" />
+
+            <fo:region-before display-align="before" extent="0.5cm" />
+
+            <fo:region-after display-align="after" extent="0.5cm" />
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+
+    <fo:page-sequence master-reference="all-pages">
+        <fo:static-content flow-name="xsl-region-before">
+            <fo:block font-family="Helvetica" font-size="10pt" text-align="center" color="white" background-color="#333333">
+                Test: Images
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('http://www.google.com/intl/en_com/images/logo_plain.png')" /&gt;:
+                <fo:external-graphic src="url('http://www.google.com/intl/en_com/images/logo_plain.png')" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" content-height="50%" content-width="25%" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" content-height="50%" content-width="25%" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" content-height="50pt" content-width="150pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" content-height="50pt" content-width="150pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" height="20pt" width="50pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" height="20pt" width="50pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" content-width="scale-to-fit" height="20pt" width="50pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" content-width="scale-to-fit" height="20pt" width="50pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" content-height="50pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" content-height="50pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" content-width="150pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" content-width="150pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('does-not-exist12345.gif')" content-height="50pt" content-width="150pt" /&gt;:
+                <fo:external-graphic src="url('does-not-exist12345.gif')" content-height="50pt" content-width="150pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" height="50pt" width="150pt" border="5pt solid black" padding="10pt" background-color="green"
+                    content-height="50pt" content-width="150pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" height="50pt" width="150pt" border="5pt solid black" padding="10pt" background-color="green"
+                    content-height="50pt" content-width="150pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" height="25pt" width="75pt" border="5pt solid black" padding="10pt" background-color="green"
+                    content-height="50pt" content-width="150pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" height="25pt" width="75pt" border="5pt solid black" padding="10pt" background-color="green"
+                    content-height="50pt" content-width="150pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" border="1pt solid" text-align="center" display-align="center" padding="5pt" background-color="green" height="70pt" width="170pt" content-height="50pt" content-width="150pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" border="1pt solid" text-align="center" display-align="center" padding="5pt" background-color="green" height="70pt" width="170pt" content-height="50pt" content-width="150pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" content-height="scale-to-fit" content-width="scale-to-fit" height="auto" width="200pt" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" content-height="scale-to-fit" content-width="scale-to-fit" height="auto" width="200pt" />
+            </fo:block>
+            <fo:block>
+                &lt;fo:external-graphic src="url('feather.gif')" content-height="scale-to-fit" content-width="scale-to-fit" height="100pt" width="auto" /&gt;:
+                <fo:external-graphic src="url('feather.gif')" content-height="scale-to-fit" content-width="scale-to-fit" height="100pt" width="auto" />
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+    
+</fo:root>
