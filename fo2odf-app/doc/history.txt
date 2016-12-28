@@ -1,3 +1,8 @@
+v1.2.2 (2016-12-28)
+-------------------
+- [#1] fix: Make PHP interface work with new PHP version and/or administrator restrictions
+- PHP 5.4+ is required now
+
 v1.2.1 (2008-06-28)
 -------------------
 - own "baseURI" attribute not used anymore, standard "xml:base" attribute used instead (for loading images with
