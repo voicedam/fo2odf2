@@ -26,7 +26,12 @@ class SafeMode {
 		if (SafeMode::isActive()) {
 			return -1;
 		}
-		return mkdir($dirname, $mode, $recursive);
+		$res = mkdir($dirname, $mode, $recursive);
+		if ($res) {
+			// we need to set the $mode once again as 'umask' could alter it within mkdir() - see http://stackoverflow.com/questions/6229353/permissions-with-mkdir-wont-work
+			chmod($dirname, $mode);
+		}
+		return $res;
 	}
 	
 	/**

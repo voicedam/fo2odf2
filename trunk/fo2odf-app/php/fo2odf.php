@@ -32,10 +32,13 @@
  * are searched only in the samples directory. 
  *
  * @author Petr Bodnár <p.bodnar@centrum.cz>
- * @require PHP 5.1+ (although the script is written in a PHP 4 style) with libxslt 1.1.?+ (it must implement all EXSLT functions used)
+ * @require PHP 5.4+ (although the script is written in a PHP 4 style) with libxslt 1.1.?+ (it must implement all EXSLT functions used)
  * @version 1.0
  * @created 2008-03-24
  */
+
+// suppress warnings from the new PHP versions:
+error_reporting(E_ALL ^ E_DEPRECATED ^ E_STRICT ^ E_NOTICE);
 
 require_once("utils.inc.php");
 
@@ -186,6 +189,9 @@ if ($doTheConversion) {
 			SafeMode::mkdir($transfDir . "/META-INF", 0777, true);// creates META-INF subdir as well
 			$proc->setParameter("", "output-dir", $transfDir . "/");
 			$proc->setParameter("", "php-safe_mode", SafeMode::isActive() ? "yes" : "no");
+			
+			// Note: This is necessary after this security feature was implemented in PHP 5.4.0: https://bugs.php.net/bug.php?id=54446
+			$proc->setSecurityPrefs(XSL_SECPREF_NONE);
 		}
 
 		// Set stylesheet parameters
@@ -232,7 +238,8 @@ if ($doTheConversion) {
 			// --- MAKE THE ODF ZIP ARCHIV
 			$zip = new ZipArchive();
 
-			if ($zip->open(SafeMode::getFilepath($outputFilepath), ZIPARCHIVE::OVERWRITE) !== true) {
+			// Note: As of PHP 5.2.6 CREATE flag needs to be supplied as well (see http://php.net/manual/en/ziparchive.open.php#88765):
+			if ($zip->open(SafeMode::getFilepath($outputFilepath), ZipArchive::CREATE | ZipArchive::OVERWRITE) !== TRUE) {
 			    $errors[] = "Cannot open file for creating the ODF zip file. $errorForAdminStr";
 			    break;
 			}
